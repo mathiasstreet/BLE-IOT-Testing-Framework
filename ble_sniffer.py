@@ -46,7 +46,7 @@ async def scan_loop():
     # Prepare CSV file and write header
     with open(csv_path, "w", newline="") as f:
         writer = csv.writer(f)
-        writer.writerow(["timestamp_ns", "mac", "rssi"])
+        writer.writerow(["timestamp_ns", "mac", "rssi", "name"])  # Header row
 
         # Normalize target MACs to lowercase for comparisons
         target_macs = {m.lower() for m in getattr(config, "TARGET_MACS", [])}
@@ -65,19 +65,21 @@ async def scan_loop():
                     # High-resolution timestamp (nanoseconds)
                     timestamp_ns = time.time_ns()
                     rssi = advertisement_data.rssi
+                    device_name = device.name or "Unknown"
 
                     # Log to console
-                    print(f"{timestamp_ns} | {mac} | RSSI: {rssi}")
+                    print(f"Time Stamp (ns): {timestamp_ns} | MAC:{mac} | RSSI: {rssi} | Name: {device_name}")
 
                     # Enqueue event for other threads/processes
                     EVENT_QUEUE.put({
                         "timestamp_ns": timestamp_ns,
                         "mac": mac,
                         "rssi": rssi,
+                        "name": device_name
                     })
 
                     # Write to CSV
-                    writer.writerow([timestamp_ns, mac, rssi])
+                    writer.writerow([timestamp_ns, mac, rssi, device_name])
                     f.flush()
             except Exception as exc:
                 # Keep scanning even if one packet causes an issue
@@ -113,5 +115,4 @@ def main():
         print(f"Unexpected error: {exc}")
 
 
-if __name__ == "__main__":
-    main()
+main()
