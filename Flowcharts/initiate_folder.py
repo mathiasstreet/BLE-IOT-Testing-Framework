@@ -1,1 +1,0 @@
-# initiates folder for flowcharts in GitHub repository
