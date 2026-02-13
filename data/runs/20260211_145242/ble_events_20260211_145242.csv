@@ -1,0 +1,4 @@
+timestamp_ns,mac,rssi,name
+1770821566093200000,60:c0:bf:49:2a:e9,-58,Unknown
+1770821566345837900,60:c0:bf:49:2a:e9,-56,Unknown
+1770821566347213900,60:c0:bf:49:2a:e9,-56,ON/ZF BLE Switch

@@ -23,6 +23,8 @@ from bleak import BleakScanner
 # Local configuration file
 import config
 
+# TODO: change EVENT_QUEUE to Asyncio.Queue if we want to use it within async code instead of threads
+
 # Thread-safe queue for sharing BLE events with other parts of the program
 EVENT_QUEUE = Queue()
 
