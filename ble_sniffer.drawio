@@ -1,10 +1,208 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0" version="29.3.8">
-  <diagram name="Page-1" id="9j1iZmZQPD9uo8kmCQHm">
-    <mxGraphModel dx="1034" dy="564" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+<mxfile host="app.diagrams.net" modified="2026-02-13T13:00:00.000Z" agent="GPT" version="22.1.0">
+  <diagram id="ble_sniffer_flow" name="BLE Sniffer Flowchart">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
       <root>
-        <mxCell id="0" />
-        <mxCell id="1" parent="0" />
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Styles -->
+        <!-- Terminator -->
+        <mxCell id="s_term" value="" style="shape=mxgraph.flowchart.terminator;whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="160" height="60" as="geometry"/>
+        </mxCell>
+        <!-- Process -->
+        <mxCell id="s_proc" value="" style="rounded=0;whiteSpace=wrap;html=1;shape=rectangle;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="260" height="70" as="geometry"/>
+        </mxCell>
+        <!-- Decision -->
+        <mxCell id="s_dec" value="" style="shape=rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="200" height="120" as="geometry"/>
+        </mxCell>
+        <!-- Data / I-O -->
+        <mxCell id="s_data" value="" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="260" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- Nodes -->
+        <mxCell id="n_start" value="Start" style="shape=mxgraph.flowchart.terminator;whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="40" width="160" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="n_main" value="Run program&#10;(main / asyncio entry)" style="shape=rectangle;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="70" y="130" width="260" height="70" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="n_setup" value="Setup output logging&#10;Create run folder, open CSV, write header" style="shape=rectangle;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="70" y="230" width="260" height="80" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="n_targets" value="Load &amp; normalise target MAC list&#10;(lowercase set)" style="shape=rectangle;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="70" y="335" width="260" height="70" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="n_scanner" value="Create BleakScanner&#10;with detection callback" style="shape=rectangle;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="70" y="430" width="260" height="70" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="n_startscan" value="Start scanning" style="shape=rectangle;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="70" y="525" width="260" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="n_adv" value="Advertisement received?" style="shape=rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="100" y="620" width="200" height="120" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="n_sleep" value="No advert yet&#10;Sleep briefly &amp; keep scanning" style="shape=rectangle;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="70" y="770" width="260" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- Callback branch on the right -->
+        <mxCell id="n_cb" value="Callback runs&#10;(device + advertisement data)" style="shape=rectangle;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="640" width="280" height="70" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="n_match" value="MAC in target list?" style="shape=rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="470" y="740" width="200" height="120" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="n_ignore" value="Ignore advert&#10;(not a target device)" style="shape=rectangle;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="900" width="280" height="70" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="n_extract" value="Extract event fields&#10;timestamp_ns, MAC, RSSI" style="shape=rectangle;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="760" y="740" width="280" height="70" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="n_console" value="Print event to console" style="shape=rectangle;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="760" y="835" width="280" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="n_queue" value="Push event to queue&#10;(for later KPI/processing)" style="shape=rectangle;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="760" y="920" width="280" height="70" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="n_csv" value="Write row to CSV&#10;Flush / persist log" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="760" y="1010" width="280" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- Stop / cleanup -->
+        <mxCell id="n_stop" value="Stop requested?&#10;(Ctrl+C / program exit)" style="shape=rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="870" width="200" height="120" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="n_cleanup" value="Cleanup&#10;Stop scanner, close file handles" style="shape=rectangle;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="70" y="1010" width="260" height="70" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="n_end" value="End" style="shape=mxgraph.flowchart.terminator;whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="1110" width="160" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Edges -->
+        <mxCell id="e1" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="n_start" target="n_main">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e2" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="n_main" target="n_setup">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e3" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="n_setup" target="n_targets">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e4" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="n_targets" target="n_scanner">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e5" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="n_scanner" target="n_startscan">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e6" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="n_startscan" target="n_adv">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Adv decision -->
+        <mxCell id="e7_yes" value="Yes" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="n_adv" target="n_cb">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="350" y="680" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7_no" value="No" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="n_adv" target="n_sleep">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="200" y="820" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Sleep loops back to adv -->
+        <mxCell id="e8" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="n_sleep" target="n_adv">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="40" y="810" as="sourcePoint"/>
+            <mxPoint x="40" y="680" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Callback to MAC decision -->
+        <mxCell id="e9" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="n_cb" target="n_match">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- MAC match decision -->
+        <mxCell id="e10_no" value="No" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="n_match" target="n_ignore">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e10_yes" value="Yes" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="n_match" target="n_extract">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Ignore loops back to adv -->
+        <mxCell id="e11" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="n_ignore" target="n_adv">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="380" y="935" as="sourcePoint"/>
+            <mxPoint x="380" y="680" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Extract -> console -> queue -> csv -->
+        <mxCell id="e12" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="n_extract" target="n_console">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e13" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="n_console" target="n_queue">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e14" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="n_queue" target="n_csv">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- CSV loops back to adv -->
+        <mxCell id="e15" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="n_csv" target="n_adv">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1060" y="1045" as="sourcePoint"/>
+            <mxPoint x="1060" y="680" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Stop decision under main loop -->
+        <mxCell id="e16" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="n_sleep" target="n_stop">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="200" y="860" as="sourcePoint"/>
+            <mxPoint x="220" y="900" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="e17_no" value="No" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="n_stop" target="n_adv">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="220" y="930" as="sourcePoint"/>
+            <mxPoint x="220" y="680" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="e17_yes" value="Yes" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="n_stop" target="n_cleanup">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e18" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="n_cleanup" target="n_end">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
       </root>
     </mxGraphModel>
   </diagram>
 </mxfile>
+
