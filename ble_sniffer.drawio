@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0" version="29.3.8">
   <diagram id="ble_sniffer_flow" name="BLE Sniffer Flowchart">
-    <mxGraphModel dx="1723" dy="940" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+    <mxGraphModel dx="1591" dy="868" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -79,12 +79,12 @@
         <mxCell id="e6" edge="1" parent="1" source="n_startscan" style="endArrow=block;html=1;rounded=0;" target="n_adv">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e7_yes" edge="1" parent="1" source="n_adv" style="endArrow=block;html=1;rounded=0;" target="n_cb" value="Yes">
+        <mxCell id="e7_yes" edge="1" parent="1" source="n_adv" style="endArrow=block;html=1;rounded=0;" target="n_cb" value="YES">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="350" y="680" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="e7_no" edge="1" parent="1" source="n_adv" style="endArrow=block;html=1;rounded=0;" target="n_sleep" value="No">
+        <mxCell id="e7_no" edge="1" parent="1" source="n_adv" style="endArrow=block;html=1;rounded=0;" target="n_sleep" value="">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="200" y="820" as="targetPoint" />
           </mxGeometry>
@@ -95,13 +95,18 @@
             <mxPoint x="40" y="680" as="targetPoint" />
           </mxGeometry>
         </mxCell>
+        <mxCell id="tmlDAgAxb0OI9yrlYv-y-9" connectable="0" parent="e8" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="NO" vertex="1">
+          <mxGeometry relative="1" x="0.1145" y="-1" as="geometry">
+            <mxPoint x="-1" y="3" as="offset" />
+          </mxGeometry>
+        </mxCell>
         <mxCell id="e9" edge="1" parent="1" source="n_cb" style="endArrow=block;html=1;rounded=0;" target="n_match">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e10_no" edge="1" parent="1" source="n_match" style="endArrow=block;html=1;rounded=0;" target="n_ignore" value="No">
+        <mxCell id="e10_no" edge="1" parent="1" source="n_match" style="endArrow=block;html=1;rounded=0;" target="n_ignore" value="NO">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e10_yes" edge="1" parent="1" source="n_match" style="endArrow=block;html=1;rounded=0;" target="n_extract" value="Yes">
+        <mxCell id="e10_yes" edge="1" parent="1" source="n_match" style="endArrow=block;html=1;rounded=0;" target="n_extract" value="YES">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e12" edge="1" parent="1" source="n_extract" style="endArrow=block;html=1;rounded=0;" target="n_console">
